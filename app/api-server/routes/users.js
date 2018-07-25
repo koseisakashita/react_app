@@ -4,7 +4,7 @@ const test = require('../public/javascripts/data');
 
 // 全てのデータ
 router.get('/', (req, res, next) => {
-  res.json(data);
+  res.json(test.datas);
 });
 
 // データ詳細
@@ -25,14 +25,31 @@ router.post('/', (req, res, next) => {
   if(data.id === null){
     // POSTされたデータの中にIDがない場合にデータのIDを準備しておく。
     data = test.createId(data);
-    test.datas.unshift(data)
   } else {
     const isExist = test.chkExistId(data);
     if(isExist != null){
       res.send('id exist!')
       return
     }
-    test.datas.push(data)
+  }
+  // データを追加する。
+  test.datas.push(data)
+  res.json(test.datas)
+})
+
+router.put('/:id',(req, res, next) => {
+  // PUTリクエストされたパラメータと合致するデータのインデックスを抽出する。
+  const index = test.datas.map((data, i) => {
+      return data.id + ''
+  }).indexOf(req.params.id + '')
+  if(index == -1){
+    res.send('data no exist!');
+    return
+  }
+  // データを更新する。
+  test.datas[index] = {
+    id: req.params.id,
+    title:req.body.title
   }
   res.json(test.datas)
 })

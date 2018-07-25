@@ -18,13 +18,21 @@ const chkExistId = (chkData) => {
 
 // IDを生成して返す
 const createId = (data) => {
-  const lists = datas;
-  lists.sort((a, b) => {
-    return b.id - a.id
-  })
+  // スマートではないが、datasとの参照を切る。
+  let lists = JSON.stringify(datas)
+  lists = JSON.parse(lists);
+
+  lists = sort(lists);
   const id = lists[0].id + 1
   data.id = id;
   return data;
+}
+
+// 大きい順でソートする。
+const sort = (lists) =>{
+  return lists.sort((a, b) => {
+    return b.id - a.id
+  })
 }
 
 module.exports.datas = datas;
