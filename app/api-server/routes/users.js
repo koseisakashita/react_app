@@ -54,4 +54,18 @@ router.put('/:id',(req, res, next) => {
   res.json(test.datas)
 })
 
+router.delete('/:id',(req, res, next) => {
+  // PUTリクエストされたパラメータと合致するデータのインデックスを抽出する。
+  const index = test.datas.map((data, i) => {
+      return data.id + ''
+  }).indexOf(req.params.id + '')
+  if(index == -1){
+    res.send('data no exist!');
+    return
+  }
+  // データを更新する。
+  test.datas.splice(index, 1)
+  res.json(test.datas)
+})
+
 module.exports = router;
