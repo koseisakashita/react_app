@@ -55,7 +55,7 @@ router.put('/:id',(req, res, next) => {
 })
 
 router.delete('/:id',(req, res, next) => {
-  // PUTリクエストされたパラメータと合致するデータのインデックスを抽出する。
+  // DELETEリクエストされたパラメータと合致するデータのインデックスを抽出する。
   const index = test.datas.map((data, i) => {
       return data.id + ''
   }).indexOf(req.params.id + '')
@@ -63,7 +63,7 @@ router.delete('/:id',(req, res, next) => {
     res.send('data no exist!');
     return
   }
-  // データを更新する。
+  // データを削除する。
   test.datas.splice(index, 1)
   res.json(test.datas)
 })
