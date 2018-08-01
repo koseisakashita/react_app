@@ -42,12 +42,6 @@ class EventsIndex extends Component {
   }
 }
 
-export class EventsNew extends Component {
-  render(){
-    return <p>fefef</p>
-  }
-}
-
 const mapStateToProps = state => ({events: state.events})
 const mapDispatchToProps = {readEvents}
 export default connect(mapStateToProps, mapDispatchToProps)(EventsIndex)
