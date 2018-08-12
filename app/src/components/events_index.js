@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 class EventsIndex extends Component {
   componentDidMount(){
     this.props.readEvents()
-    console.log(this)
   }
 
   renderEvents(){
